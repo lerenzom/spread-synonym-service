@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as logger from 'morgan';
-import synonymsRouter from './routes/synonyms';
+import synonymsRouter from './routes/synonyms.route';
 
 export const app = express();
 
