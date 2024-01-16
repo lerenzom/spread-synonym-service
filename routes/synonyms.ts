@@ -6,6 +6,7 @@ const router = Router();
 router.post('/add', async function (req, res, next) {
     const a = req.query.a.toString()
     const b = req.query.b.toString()
+    if(!a || !b) res.status(400).send({message: "Bad Request"})
     await addSynonymsWorker(res, a, b)
 });
 
