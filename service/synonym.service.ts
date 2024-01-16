@@ -4,7 +4,7 @@ import {Commands} from "./synonym.worker";
 import {Word} from "../model/word";
 
 
-
+// We replace this value when adding synonyms instead of mutating the object
 let words = new Map<string, Word>()
 
 export async function getSynonymsWorker(res: Response, word: string) {

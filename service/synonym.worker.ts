@@ -39,8 +39,8 @@ export const getSynonyms = (searchTerm: string, words: Map<string, Word>) => {
     if(!words.has(searchTerm)) return []
 
     const root = words.get(searchTerm)
-    let queue = [root];
-    let visited = new Set([root.word]);
+    const queue = [root];
+    const visited = new Set([root.word]);
     const returnSet = new Set<string>()
 
     while (queue.length > 0) {

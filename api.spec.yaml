@@ -1,0 +1,68 @@
+openapi: 3.0.3
+info:
+  title: Synonym Service API
+  description: API for synonym service coding challenge
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/synonyms'
+paths:
+  /add:
+    post:
+      tags:
+        - synonyms
+      summary: Add synonyms together
+      operationId: addSynonyms
+      parameters:
+        - name: a
+          in: query
+          description: Word A
+          required: true
+          schema:
+            type: string
+        - name: b
+          in: query
+          description: Word B
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  synonyms:
+                    type: array
+                    description: Synonyms
+                    items:
+                      type: string
+  /search:
+    get:
+      tags:
+        - synonym
+      summary: Get synonyms for a word
+      operationId: getSynonyms
+      parameters:
+        - name: word
+          in: query
+          description: word to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  synonyms:
+                    type: array
+                    description: Synonyms
+                    items:
+                      type: string
+        '404':
+          description: Not found
