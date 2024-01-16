@@ -6,16 +6,18 @@ const router = Router();
 router.post('/add', async function (req, res, next) {
     const a = req.query.a.toString()
     const b = req.query.b.toString()
-    if(!a || !b) res.status(400).send({message: "Bad Request"})
-    await addSynonymsWorker(res, a, b)
+    if (!a || !b) res.status(400).send({message: "Bad Request"})
+
+    const response = await addSynonymsWorker(res, a, b)
+    return res.status(200).json(response)
 });
 
 router.get('/search', async function (req, res, next) {
     const word = req.query.word
     if (!hasWord(word.toString()))
-        res.status(404).json({message: "Not found"})
+        return res.status(404).json({message: "Not found"})
     else
-        await getSynonymsWorker(res, req.query.word.toString());
+        return res.status(200).json(await getSynonymsWorker(req.query.word.toString()))
 });
 
 export default router;
