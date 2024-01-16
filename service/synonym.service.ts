@@ -13,7 +13,7 @@ export async function getSynonymsWorker(res: Response, word: string) {
         res.status(200).json({synonyms: [...data.synonyms]})
         await worker.terminate()
     });
-    worker.postMessage({searchTerm: word.toString(), words, command: Commands.GET_SYNONYMS})
+    worker.postMessage({command: Commands.GET_SYNONYMS, searchTerm: word.toString(), words})
 }
 
 export async function addSynonymsWorker(res: Response, a: string, b: string) {

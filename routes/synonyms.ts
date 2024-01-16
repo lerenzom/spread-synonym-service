@@ -14,7 +14,7 @@ router.get('/search', async function (req, res, next) {
     if (!hasWord(word.toString()))
         res.status(404).json({message: "Not found"})
     else
-        await getSynonymsWorker(res, word.toString());
+        await getSynonymsWorker(res, req.query.word.toString());
 });
 
 export default router;

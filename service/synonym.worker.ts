@@ -2,23 +2,25 @@ import {isMainThread, parentPort} from 'worker_threads';
 import {Word} from "../model/word";
 
 export enum Commands {
-    GET_SYNONYMS,
-    ADD_SYNONYMS
+    GET_SYNONYMS = "GET_SYNONYMS",
+    ADD_SYNONYMS = "ADD_SYNONYMS"
 }
 
 if (!isMainThread) {
-    parentPort.on("message", ({searchTerm, words, command, a, b}: {searchTerm?: string, words?: Map<string, Word>, command: Commands, a?: string, b?: string}) => {
+    parentPort.on("message", ({searchTerm, words, command, a, b}: {searchTerm?: string, words?: Map<string, Word>, command: string, a?: string, b?: string}) => {
         switch (command) {
             case Commands.GET_SYNONYMS:
                 parentPort.postMessage({
                     word: searchTerm,
                     synonyms: getSynonyms(searchTerm, words)
                 });
+                break
             case Commands.ADD_SYNONYMS:
                 parentPort.postMessage({
                     word: searchTerm,
                     words: addSynonyms(a, b, words)
                 });
+                break
         }
     });
 }
